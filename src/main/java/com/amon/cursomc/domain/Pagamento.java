@@ -1,6 +1,7 @@
 package com.amon.cursomc.domain;
 
 import com.amon.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,9 +16,10 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
-    @MapsId
+    @MapsId // O Id dessa classe é o mesmo da classe pedido (reforçado por serem um para um)
     private Pedido pedido;
 
     public Pagamento() {

@@ -1,6 +1,7 @@
 package com.amon.cursomc.services;
 
 import com.amon.cursomc.domain.Categoria;
+import com.amon.cursomc.domain.Cliente;
 import com.amon.cursomc.dto.CategoriaDTO;
 import com.amon.cursomc.repositories.CategoriaRepository;
 import com.amon.cursomc.services.exceptions.DataIntegrityException;
@@ -33,8 +34,13 @@ public class CategoriaService {
     }
 
     public Categoria update (Categoria obj){
-        find(obj.getId());
-        return repo.save(obj);
+        Categoria newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
     }
 
     public void delete(Integer id){

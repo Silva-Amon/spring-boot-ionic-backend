@@ -1,12 +1,14 @@
 package com.amon.cursomc.dto;
 
 import com.amon.cursomc.domain.Cliente;
+import com.amon.cursomc.services.validation.ClienteUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 2991126760488882098L;
 

@@ -12,7 +12,7 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
     private double preco;
 
     @JsonIgnore
@@ -30,9 +30,9 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Produto(Integer id, String name, double preco) {
+    public Produto(Integer id, String nome, double preco) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.preco = preco;
     }
 
@@ -44,12 +44,12 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getPreco() {

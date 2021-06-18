@@ -11,6 +11,7 @@ import com.amon.cursomc.repositories.ProdutoRepository;
 import com.amon.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class PedidoService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
 
+    @Transactional
     public Pedido insert(Pedido obj) {
         obj.setId(null);
         obj.setInstante(new Date());

@@ -24,7 +24,7 @@ public class DevConfig {
         if (!"craete".equals(strategy)){
             return false;
         }
-        
+
         dbService.instantiateDatabase();
         return true;
     }

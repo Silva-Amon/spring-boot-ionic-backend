@@ -1,6 +1,8 @@
 package com.amon.cursomc.config;
 
 import com.amon.cursomc.services.DBService;
+import com.amon.cursomc.services.EmailService;
+import com.amon.cursomc.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,5 +29,10 @@ public class DevConfig {
 
         dbService.instantiateDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }

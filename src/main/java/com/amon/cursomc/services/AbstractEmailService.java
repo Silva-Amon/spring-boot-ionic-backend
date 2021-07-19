@@ -1,5 +1,6 @@
 package com.amon.cursomc.services;
 
+import com.amon.cursomc.domain.Cliente;
 import com.amon.cursomc.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,5 +68,19 @@ public abstract class AbstractEmailService implements EmailService {
         return mimeMessage;
     }
 
+    @Override
+    public void sendNewPasswordEmail(Cliente cliente, String newPass) {
+        SimpleMailMessage sm = prepareNewPasswordMail(cliente, newPass);
+        sendEmail(sm);
+    }
 
+    protected SimpleMailMessage prepareNewPasswordMail(Cliente cliente, String newPass){
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(cliente.getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("Solicitação de nova senha");
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText("Nova senha: " + newPass);
+        return sm;
+    }
 }

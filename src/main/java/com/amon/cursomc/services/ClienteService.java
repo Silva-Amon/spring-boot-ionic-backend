@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
@@ -110,6 +111,20 @@ public class ClienteService {
     }
 
     public URI uploaProfilePicture(MultipartFile multipartFile){
-        return s3Service.uploadFile(multipartFile);
+
+        UserSS user = UserService.authenticated();
+
+        if (user == null){
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        URI uri = s3Service.uploadFile(multipartFile);
+
+        Cliente cli = repo.findById(user.getId()).get();
+
+        cli.setImgUrl(uri.toString());
+        repo.save(cli);
+
+        return uri;
     }
 }
